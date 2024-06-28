@@ -2,12 +2,12 @@ import { useState } from 'react';
 import './App.css';
 import FilterableBookTable from './components/filterableBookTable';
 import { BookItemModel } from './models';
+import BookRegister from './components/bookRegister';
 
 function App() {
-  const [isbn, setIsbn] = useState('');
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
-  const handleClickButton = (): void => {
+  const handleClickButton = (isbn : string): void => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
       .then((response) => response.json())
       .then((data) => {
@@ -35,17 +35,7 @@ function App() {
   return (
     <div className="App">
       {/* 第1問：コンポーネントに分割 ↓ ↓ ↓ ↓ ↓ */}
-      <div className="book-register">
-        <div className="label-input">
-          <label className="label">
-            ISBNコード
-          </label>
-          <input className="input" placeholder="入力してください" value={isbn} onChange={(e) => setIsbn(e.target.value)}></input>
-        </div>
-        <button className="button" onClick={handleClickButton}>
-          書籍登録
-        </button>
-      </div>
+      <BookRegister handleClickButton={handleClickButton}></BookRegister>
       {/* 第1問：コンポーネントに分割 ↑ ↑ ↑ ↑ ↑ ↑ */}
       <hr />
       <FilterableBookTable
