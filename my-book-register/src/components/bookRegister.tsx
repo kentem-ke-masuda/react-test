@@ -1,5 +1,5 @@
 import LabelInput from "./labelInput"
-import { useState } from "react";
+import { useState , ChangeEventHandler } from "react";
 
 const BooKRegister : React.FC<{handleClickButton:(isbn:string)=>void}> = ({handleClickButton}) => {
 
@@ -9,13 +9,12 @@ const BooKRegister : React.FC<{handleClickButton:(isbn:string)=>void}> = ({handl
         handleClickButton(isbn)
     }
 
-    const handleIsbn = (newIsbn:string)=> {
-        setIsbn(newIsbn)
-    }
+    const handleIsbn :ChangeEventHandler<HTMLInputElement> = (e) =>
+        setIsbn(e.target.value);
 
       return(
         <div className="book-register">
-            <LabelInput handleIsbn={handleIsbn}></LabelInput>
+            <LabelInput label={"ISBNコード"} handleIsbn={handleIsbn}></LabelInput>
             <button className="button" onClick={()=>{callhandleClickButton(isbn)}}>
             書籍登録
             </button>

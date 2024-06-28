@@ -1,12 +1,13 @@
+import {ChangeEventHandler} from 'react';
 
 
-const LabelInput : React.FC<{handleIsbn : (newIsbn: string) => void}> = ({handleIsbn}) => {
+const LabelInput : React.FC<{label:string ,  handleIsbn : ChangeEventHandler<HTMLInputElement>}> = ({label ,handleIsbn}) => {
     return(
         <div className="label-input">
           <label className="label">
-            ISBNコード
+            {label}
           </label>
-          <input className="input" placeholder="入力してください" onChange={(e) => handleIsbn(e.target.value)}></input>
+          <input className="input" placeholder="入力してください" onChange={handleIsbn}></input>
         </div>
     )
 }
