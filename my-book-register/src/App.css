@@ -31,3 +31,16 @@
   gap: 10px;
   text-align: center;
 }
+
+.filter-field{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field{
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
