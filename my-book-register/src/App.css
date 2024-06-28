@@ -17,12 +17,17 @@
 
 .label-input {
   display: flex;
+  gap: 10px;
 }
 
 .book-register {
   display: flex;
+  gap: 10px;
 }
 
 .filterable-book-table {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
 }

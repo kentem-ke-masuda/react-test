@@ -20,6 +20,7 @@ const FilterableBookTable = ({
 
   return (
     <div className="filterable-book-table">
+      {/* コンポーネントの再利用が可能 */}
       <div className="label-input">
         <label className="label">
           filter

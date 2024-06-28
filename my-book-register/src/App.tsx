@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="App">
       {/* 第1問：コンポーネントに分割 ↓ ↓ ↓ ↓ ↓ */}
-      <BookRegister handleClickButton={handleClickButton}></BookRegister>
+      <BookRegister handleClickButton={handleClickButton} />
       {/* 第1問：コンポーネントに分割 ↑ ↑ ↑ ↑ ↑ ↑ */}
       <hr />
       <FilterableBookTable
