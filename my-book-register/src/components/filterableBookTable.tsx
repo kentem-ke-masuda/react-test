@@ -21,8 +21,7 @@ const FilterableBookTable = ({
 
   return (
     <div className="filterable-book-table">
-      {/* コンポーネントの再利用が可能 */}
-      <LabelInput label="filter" handleIsbn={handleChangeFilterText}/>
+      <LabelInput label="filter" handleEvent={handleChangeFilterText}/>
       <BookTable
         bookItems={books.filter(
           (x) => !filterText || x.name.includes(filterText),

@@ -3,6 +3,7 @@ import './App.css';
 import FilterableBookTable from './components/filterableBookTable';
 import { BookItemModel } from './models';
 import BookRegister from './components/bookRegister';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
     setBooks((prev) => [
       ...prev,
       {
-        id: prev.length.toString(),
+        id: uuidv4(),
         ...postedItem,
       },
     ]);
@@ -52,8 +53,9 @@ function App() {
         }
         onClickLendingSwitch={(id) => {
           //mapでつくれるか・・・・
-          const newBooks = [...books]
-          newBooks[Number(id)].isOnLoan = !newBooks[Number(id)].isOnLoan
+          const newBooks : BookItemModel[] = books.map( (bookItem) => {
+            return bookItem.id === id ? { ...bookItem , isOnLoan : !bookItem.isOnLoan} : { ...bookItem}
+          })
           setBooks(newBooks)
           }
         }

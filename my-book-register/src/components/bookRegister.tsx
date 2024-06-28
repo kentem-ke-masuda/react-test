@@ -9,12 +9,12 @@ const BooKRegister : React.FC<{handleClickButton:(isbn:string)=>void}> = ({handl
         handleClickButton(isbn)
     }
 
-    const handleIsbn :ChangeEventHandler<HTMLInputElement> = (e) =>
+    const handleChangeIsbn :ChangeEventHandler<HTMLInputElement> = (e) =>
         setIsbn(e.target.value);
 
       return(
         <div className="book-register">
-            <LabelInput label={"ISBNコード"} handleIsbn={handleIsbn}></LabelInput>
+            <LabelInput label={"ISBNコード"} handleEvent={handleChangeIsbn}></LabelInput>
             <button className="button" onClick={()=>{callhandleClickButton(isbn)}}>
             書籍登録
             </button>
