@@ -2,12 +2,17 @@ import { useState } from 'react';
 import './App.css';
 import FilterableBookTable from './components/filterableBookTable';
 import { BookItemModel } from './models';
+import BookRegister from './components/bookRegister';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
-  const [isbn, setIsbn] = useState('');
+
+  //9784297130589
+  //9784873115658
+
   const [books, setBooks] = useState<BookItemModel[]>([]);
 
-  const handleClickButton = (): void => {
+  const handleClickButton = (isbn : string): void => {
     fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`)
       .then((response) => response.json())
       .then((data) => {
@@ -26,7 +31,7 @@ function App() {
     setBooks((prev) => [
       ...prev,
       {
-        id: prev.length.toString(),
+        id: uuidv4(),
         ...postedItem,
       },
     ]);
@@ -35,27 +40,23 @@ function App() {
   return (
     <div className="App">
       {/* 第1問：コンポーネントに分割 ↓ ↓ ↓ ↓ ↓ */}
-      <div className="book-register">
-        <div className="label-input">
-          <label className="label">
-            ISBNコード
-          </label>
-          <input className="input" placeholder="入力してください" value={isbn} onChange={(e) => setIsbn(e.target.value)}></input>
-        </div>
-        <button className="button" onClick={handleClickButton}>
-          書籍登録
-        </button>
-      </div>
+      <BookRegister handleClickButton={handleClickButton} />
       {/* 第1問：コンポーネントに分割 ↑ ↑ ↑ ↑ ↑ ↑ */}
       <hr />
       <FilterableBookTable
         books={books}
         onClickDelete={(id) => {
-            {/* 第2問：貸出 or 返却 or 削除の処理を追加 */}            
+            const newBooks = books.filter(bookItems=>bookItems.id !== id)
+            console.log(newBooks)
+            setBooks(newBooks)             
           }
         }
         onClickLendingSwitch={(id) => {
-            {/* 第2問：貸出 or 返却 or 削除の処理を追加 */}            
+          //mapでつくれるか・・・・
+          const newBooks : BookItemModel[] = books.map( (bookItem) => {
+            return bookItem.id === id ? { ...bookItem , isOnLoan : !bookItem.isOnLoan} : { ...bookItem}
+          })
+          setBooks(newBooks)
           }
         }
       />
